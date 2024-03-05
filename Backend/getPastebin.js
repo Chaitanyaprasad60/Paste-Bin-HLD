@@ -17,6 +17,7 @@ redisClient.connect().then(() => {
 
 async function getPasteBin(req, res) {
     try {
+        
         let isExist = await doesPasteExists(req.body.pasteId);
         if (!isExist) {
             return res.status(200).send({
@@ -25,7 +26,18 @@ async function getPasteBin(req, res) {
             })
         }
 
-        let 
+        let paste = await getOrSetPasteCache(req.body.pasteId,async ()=>{
+            //Get Data From MongoDB.
+            let pasteData = await mongoDbClient.db("pastes").collection("pastes").find({
+                pasteId:req.body.pasteId
+            }); 
+            return pasteData;
+        })
+
+        return res.status(200).send({
+            status:"status",
+            response: paste
+        })
 
 
 
@@ -34,7 +46,7 @@ async function getPasteBin(req, res) {
     catch (error) {
         return res.status(500).send({
             status:"error",
-            response:"Error occured while getting paste content"
+            response: error || "Error occured while getting paste content"
         })
     }
 
@@ -58,6 +70,8 @@ async function getOrSetPasteCache(key, cb) {
         }
     })
 }
+
+
 
 
 
