@@ -26,6 +26,10 @@ async function getPasteBin(req, res) {
             })
         }
 
+        return res.status(200).send({
+            status:"error",
+            response:"Paste exists"
+        })
         let paste = await getOrSetPasteCache(req.body.pasteId,async ()=>{
             //Get Data From MongoDB.
             let pasteData = await mongoDbClient.db("pastes").collection("pastes").find({
@@ -44,6 +48,7 @@ async function getPasteBin(req, res) {
 
     }
     catch (error) {
+        console.log(error)
         return res.status(500).send({
             status:"error",
             response: error || "Error occured while getting paste content"
