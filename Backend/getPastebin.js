@@ -71,6 +71,12 @@ async function getOrSetPasteCache(key, cb) {
     })
 }
 
+// An interesting shortcut.
+// Instead of writing this as a promise and awaiting inside it, just return it and await on doesPasteExists
+async function doesPasteExists(pasteId){
+    let bloomFilterName = process.env.BLOOM_FILTER || config.bloomFilterName;
+    return redisClient.bf.exists(bloomFilterName,pasteId);
+}
 
 
 
