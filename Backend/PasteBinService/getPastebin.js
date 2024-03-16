@@ -1,9 +1,12 @@
 // Importing neccesary artifacts
 const Redis = require('redis');
 const config = require("./config.json");
+const db = require("./dbModels/dbFunctions");
+const axios  = require('axios');
 
 
 const redisClient = Redis.createClient({ url: process.env.REDIS_CONN_STRING || config.redisConnectString }); // Give URL of redis server for prod.
+
 
 // Creating a connection with Redis Server. 
 redisClient.connect().then(() => {
@@ -12,12 +15,14 @@ redisClient.connect().then(() => {
     return redisClient.ping()
 }).then((data) => {
     console.log({ data })
+}).catch((error)=>{
+    console.log("Error While connect to Redis Server",error)
 })
+
 
 
 async function getPasteBin(req, res) {
     try {
-        
         let isExist = await doesPasteExists(req.body.pasteId);
         if (!isExist) {
             return res.status(200).send({
@@ -26,15 +31,9 @@ async function getPasteBin(req, res) {
             })
         }
 
-        return res.status(200).send({
-            status:"error",
-            response:"Paste exists"
-        })
         let paste = await getOrSetPasteCache(req.body.pasteId,async ()=>{
             //Get Data From MongoDB.
-            let pasteData = await mongoDbClient.db("pastes").collection("pastes").find({
-                pasteId:req.body.pasteId
-            }); 
+            let pasteData = await db.getPaste(req.body.pasteId); 
             return pasteData;
         })
 
@@ -42,10 +41,6 @@ async function getPasteBin(req, res) {
             status:"status",
             response: paste
         })
-
-
-
-
     }
     catch (error) {
         console.log(error)
@@ -84,6 +79,43 @@ async function doesPasteExists(pasteId){
 }
 
 
+// Steps to Create a new Paste
+// 1. Get a new key from Key Generation Service
+// 2. Enter this new key with the data into the mongoDB. 
+async function addNewPaste(req, res) {
+    try {
+
+        let pasteId = "abcdefghi123";
+        var expiryDate = new Date();
+        //expiryDate.setDate(expiryDate.getDate() + 10);
+        expiryDate.setSeconds(expiryDate.getSeconds() + 70);
 
 
-module.exports = getPasteBin;
+        let response = await db.addPaste({
+            pasteId,
+            title: "Title it is",
+            pasteData: "Data it is",
+            createdBy: "Chaitanya Prasad",
+            expireAt: expiryDate
+        })
+        return res.status(200).send({
+            status: "success",
+            response: pasteId
+        })
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            status: "error",
+            response: error || "Error occured while creating new paste"
+        })
+    }
+}
+
+
+
+
+module.exports = {
+    getPasteBin,
+    addNewPaste
+};

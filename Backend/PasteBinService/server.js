@@ -4,7 +4,7 @@ const express = require('express');
 var bodyParser = require('body-parser')
 const cors = require('cors');
 const config = require("./config.json");
-const getPasteBin = require('./getPastebin');
+const {getPasteBin,addNewPaste} = require('./getPastebin');
 const utils = require("./utilFunctions");
 
 // Declaring neccesary variables. 
@@ -20,9 +20,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json())
 
-app.get("/getPasteData",utils.checkParams(["pasteId"]),(req,res)=>{
-    getPasteBin(req,res);
-});
+app.get("/getPasteData",utils.checkParams(["pasteId"]),getPasteBin);
+
+app.post("/createPaste",utils.checkParams(["title","content"]),addNewPaste);
 
 
 app.listen(PORT,()=>{

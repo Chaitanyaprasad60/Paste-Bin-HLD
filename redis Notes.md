@@ -35,3 +35,7 @@
  - redisClient.bf.reverse(<filter-name>,<error-rate>,<records-size>)
  - redisClient.bf.exists(<filter-name>,<record>)
  - redisClient.bf.add(<filter-name>,<record>)
+
+
+8. Some Common Errors and Solutions
+ - Could not connect to Redis at 127.0.0.1:6379: Connection refused - redis-server --daemonize yes
