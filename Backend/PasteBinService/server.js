@@ -22,7 +22,9 @@ app.use(bodyParser.json())
 
 app.get("/getPasteData",utils.checkParams(["pasteId"]),getPasteBin);
 
-app.post("/createPaste",utils.checkParams(["title","content"]),addNewPaste);
+app.post("/createPaste",
+utils.checkParams(["title","content","pasteData","createdBy","expireAt"]),
+addNewPaste);
 
 
 app.listen(PORT,()=>{

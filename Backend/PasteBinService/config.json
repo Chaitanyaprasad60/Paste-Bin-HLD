@@ -1,5 +1,6 @@
 {
     "port":3000,
     "redisConnectString":"redis://localhost:6379",
-    "bloomFilterName":"pasteIds"
+    "bloomFilterName":"pasteIds",
+    "idGenerationLink":"http:localhost:4000/getNewId"
 }
