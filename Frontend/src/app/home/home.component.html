@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="content">
+      <div class="left">
+        <mat-form-field>
+          <mat-label>Title:</mat-label>
+          <textarea matInput rows="1" cols="50" placeholder="Enter title"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Author Name">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="expiryDatePicker" placeholder="Expiry Date">
+          <mat-datepicker-toggle matSuffix [for]="expiryDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #expiryDatePicker></mat-datepicker>
+        </mat-form-field>
+        <h2>Content</h2>
+        <textarea matInput rows="10" cols="50" placeholder="Enter content"></textarea>
+      </div>
+      <div class="right">
+        <div class="options">
+          <button mat-raised-button color="primary">Paste <mat-icon>content_paste</mat-icon></button>
+          <button mat-raised-button color="primary">Copy Link <mat-icon>link</mat-icon></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

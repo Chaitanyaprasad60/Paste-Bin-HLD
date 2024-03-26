@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  
+    .content {
+      display: flex;
+      width: 80%;
+    }
+  
+    .left {
+      flex: 1;
+      padding: 20px;
+  
+      .mat-form-field {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+  
+      h2 {
+        margin-top: 20px;
+      }
+    }
+  
+    .right {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  
+      .options {
+        width: 100%;
+  
+        button {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+  
