@@ -1,44 +1,123 @@
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+
   
-    .content {
-      display: flex;
-      width: 80%;
+
+  .left {
+    flex: 1;
+    padding: 20px;
+    height: 90%;
+    width: 60%;
+
+    h2 {
+      margin-top: 20px;
+      display: inline;
+      margin-right: 2vw;
+    }
+
+    #contentText{
+      border: 0.2vw solid gray;
+      height: 80%;
+      resize:none;
     }
   
-    .left {
-      flex: 1;
-      padding: 20px;
-  
-      .mat-form-field {
-        width: 100%;
-        margin-bottom: 20px;
-      }
-  
-      h2 {
-        margin-top: 20px;
-      }
+    #ttitleText{
+      //border-bottom-style: solid;
+      border-bottom: solid 0.2vw gray;
+      margin-bottom: 2vh;
+      resize:none;
     }
-  
-    .right {
+  }
+
+  .right {
+   
+    height: 90%;
+    text-align: center;
+    width: 40%;
+
+    mat-form-field{
+      width:80%;
+    }
+
+    .rightDetails{
       flex: 1;
       padding: 20px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: top;
       align-items: center;
-  
-      .options {
-        width: 100%;
-  
-        button {
-          width: 100%;
-          margin-bottom: 10px;
-        }
+      width: 80%;
+      margin-left: 5vw;
+      margin-right: 5vw;
+      border: solid 0.2vw gray;
+      margin: auto;
+
+
+      button {
+        width: 80%;
+        margin-bottom: 2vh;
+        background-color: purple;
       }
     }
+
+    
+
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: purple;
+  padding: 10px 20px;
+  color: white;
+  height: 7vh;
+}
+
+.title {
+  margin: 0;
+}
+
+.name {
+  margin: 0;
+  cursor: pointer;
+  font-size: large;
+  text-decoration: underline;
+}
+
+.name:hover {
+  color: wheat;
+}
+
+.name {
+  margin-right: 10px;
+}
+
+
+@media screen and (max-width: 480px){
+
+  .container {
+    flex-direction: column;
+    display: inline-block;
+    justify-content: unset;
+    align-items: center;
+    height: unset;
+
+    .left {
+      width: 90%;
+    }
+    .right{
+      width: 80%;
+      margin:auto;
+    }
+  }
+
+  .pconly{
+    display: none;
   }
   
+}
