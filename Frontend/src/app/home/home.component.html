@@ -18,11 +18,11 @@
   <div class="left">
 
     <h2>Title</h2>
-    <textarea id="ttitleText" matInput rows="1" cols="50" [(ngModel)]="title" placeholder="Enter title"></textarea>
+    <textarea id="ttitleText" [disabled]="!canEdit" matInput rows="1" cols="50" [ngClass]="{'error': error.title}" [(ngModel)]="title" placeholder="Enter title"></textarea>
 
 
     <h2>Content</h2>
-    <textarea id="contentText" matInput rows="10" cols="50" [(ngModel)]="content" placeholder="Enter content"></textarea>
+    <textarea id="contentText"  [disabled]="!canEdit" matInput rows="10" cols="50" [(ngModel)]="content" [ngClass]="{'error': error.content}" placeholder="Enter content"></textarea>
 
   </div>
 
@@ -32,17 +32,17 @@
     <div class="rightDetails">
 
       <mat-form-field>
-        <input matInput placeholder="Author Name">
+        <input matInput [(ngModel)]="createdBy" [disabled]="!canEdit" placeholder="Author Name">
       </mat-form-field>
 
       <mat-form-field>
   
-        <input matInput [matDatepicker]="expiryDatePicker" placeholder="Expiry Date">
+        <input matInput [(ngModel)]="expireAt" [disabled]="!canEdit" [matDatepicker]="expiryDatePicker" placeholder="Expiry Date">
         <mat-datepicker-toggle matSuffix [for]="expiryDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #expiryDatePicker></mat-datepicker>
   
       </mat-form-field>
-      <button mat-raised-button color="primary">Create Paste</button>
+      <button mat-raised-button color="primary" (click)="createPaste()">Create Paste</button>
       <button mat-raised-button color="primary">Copy Link <mat-icon>link</mat-icon></button>
     </div>
     
