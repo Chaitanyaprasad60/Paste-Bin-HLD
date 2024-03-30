@@ -125,3 +125,7 @@
 .error{
   border: 2px solid red !important;
 }
+
+textarea[disabled],input[disabled]{
+  color:black;
+}

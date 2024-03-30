@@ -4,13 +4,12 @@ async function addPaste(pasteObject){
     return new Promise(async (resolve,reject)=>{
         try{
             let response = await pasteDb.create({
-                pasteId:pasteObject.paseId,
+                pasteId:pasteObject.pasteId,
                 title:pasteObject.title,
-                pasteData:pasteObject.pasteData,
+                content:pasteObject.content,
                 createdBy: pasteObject.createdBy,
                 expireAt: pasteObject.expireAt || 0
             })
-            console.log({response})
             resolve({
                 status:"success",
                 response:"Paste Created"
@@ -28,8 +27,8 @@ async function addPaste(pasteObject){
     
 }
 
-function getPaste(paseId){
-    return pasteDb.find({paseId});
+function getPaste(pasteId){
+    return pasteDb.find({pasteId});
 }
 
 module.exports = {

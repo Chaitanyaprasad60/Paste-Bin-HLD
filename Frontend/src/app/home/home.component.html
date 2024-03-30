@@ -42,8 +42,8 @@
         <mat-datepicker #expiryDatePicker></mat-datepicker>
   
       </mat-form-field>
-      <button mat-raised-button color="primary" (click)="createPaste()">Create Paste</button>
-      <button mat-raised-button color="primary">Copy Link <mat-icon>link</mat-icon></button>
+      <button mat-raised-button color="primary" (click)="createPaste()">Create New Paste</button>
+      <button mat-raised-button color="primary" *ngIf="!canEdit" [cdkCopyToClipboard]="pasteLink">Copy Link <mat-icon>link</mat-icon></button>
     </div>
     
 

@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
 app.get("/getNewId",(req,res)=>{
+    
     db.query("INSERT INTO pasteBinIds(pasteId) VALUE(0)",(err,data)=>{
         if(err){
             return res.status(200).send({

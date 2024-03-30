@@ -14,7 +14,7 @@ const Paste = mongoose.model('paste',new mongoose.Schema({
     title:{
         type: String
     },
-    pasteData:{
+    content:{
         type: String
     },
     createdBy:{

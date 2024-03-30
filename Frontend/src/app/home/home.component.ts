@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallsService } from '../services/api-calls.service';
 import {StandardResponse,Paste} from '../interfaces/interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -20,15 +21,23 @@ export class HomeComponent implements OnInit {
     content:false
   }
   canEdit = true;
+  pasteLink = "";
+  pasteId = "";
 
   constructor(private route: ActivatedRoute,
+    private router: Router,
               private backend:ApiCallsService,
               private snackBar: MatSnackBar) {
 
 
     this.route.queryParams.subscribe((param) => {
+
       if(param["pasteId"]){
-        this.backend.getPasteDetails(param["paseId"]).subscribe((resp:StandardResponse)=>{
+        
+        this.pasteId = param["pasteId"];
+
+        this.backend.getPasteDetails(param["pasteId"]).subscribe((resp:StandardResponse)=>{
+          this.pasteLink = environment.frontendUrl + `?pasteId=${param["pasteId"]}`;
           if(resp.status == "success"){
             this.title = resp.response.title;
             this.content = resp.response.content;
@@ -49,13 +58,16 @@ export class HomeComponent implements OnInit {
   }
 
   createPaste(){
+    if(this.pasteId){
+      window.open(environment.frontendUrl);
+      return;
+    }
     if(!this.title) this.error.title = true;
     if(!this.content) this.error.content = true;
 
-    // To iterate over all JSON values and Not Submit form even if one is false. 
-    if(!Object.values(this.error).reduce((acc, cur) => { return acc && cur})) return;
+    // To iterate over all JSON values and Not Submit form even if one is true. 
+    if(Object.values(this.error).reduce((acc, cur) => { return acc || cur})) return;
 
-    console.log("Here")
     console.log(this.title,this.content,this.createdBy,this.expireAt);
 
     this.backend.createNewPaste({
@@ -64,15 +76,21 @@ export class HomeComponent implements OnInit {
       createdBy:this.createdBy,
       expireAt:this.expireAt
     }).subscribe((resp:StandardResponse)=>{
-
+      console.log({resp})
+     
       if(resp.status == "success"){
         let pasteId = resp.response;
-        console.log({pasteId});
+        this.canEdit = false;
+        this.router.navigate([], {queryParams: { pasteId }} )
       }
       else{
         console.log("In Error",resp)
         this.snackBar.open("Error while creating a new paste try again", 'Dismiss', { duration: 3000 })
       }
     })
+  }
+
+  copyLink(){
+
   }
 }
