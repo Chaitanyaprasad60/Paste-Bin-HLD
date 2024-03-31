@@ -2,7 +2,8 @@
 Paste bin is the most asked interview questions in MAANG companies. But have you seen an real time implementation explaining the trade-offs. Here it is!! Checkout how I explored Redis, Node.js and Angular to make a smooth Paste Bin application. 
 
 # Architecture 
-![image](https://github.com/Chaitanyaprasad60/Paste-Bin-HLD/assets/49819086/5b36da08-06d1-41db-9c38-ccf0927ef4f2)
+![Paste Bin Architeture](https://github.com/Chaitanyaprasad60/Paste-Bin-HLD/assets/49819086/1e3e0b8b-fa0e-440a-a5dc-4e7e423afe3a)
+
 
 
 ```
