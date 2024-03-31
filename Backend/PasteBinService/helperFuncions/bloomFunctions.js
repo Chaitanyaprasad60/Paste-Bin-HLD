@@ -26,6 +26,7 @@ module.exports.doesPasteExists = async function doesPasteExists(pasteId){
 }
 
 module.exports.addPasteId = async function addPasteId(pasteId){
+    console.log({bloomFilterName,pasteId})
     return redisClient.bf.add(bloomFilterName,pasteId)
 }
 

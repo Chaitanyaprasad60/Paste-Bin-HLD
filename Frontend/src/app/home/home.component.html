@@ -37,7 +37,7 @@
 
       <mat-form-field>
   
-        <input matInput [(ngModel)]="expireAt" [disabled]="!canEdit" [matDatepicker]="expiryDatePicker" placeholder="Expiry Date">
+        <input matInput [(ngModel)]="expireAt" [min]="todayDate" [disabled]="!canEdit" [matDatepicker]="expiryDatePicker" placeholder="Expiry Date">
         <mat-datepicker-toggle matSuffix [for]="expiryDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #expiryDatePicker></mat-datepicker>
   

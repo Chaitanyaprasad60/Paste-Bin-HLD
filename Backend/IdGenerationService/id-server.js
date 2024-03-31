@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json())
+let RANGE_SIZE = 10000;
 
 app.get("/getNewId",(req,res)=>{
     
@@ -33,6 +34,7 @@ app.get("/getNewId",(req,res)=>{
         }
         else{
             let id = data.insertId;
+            id = (id * 31 + 17) % RANGE_SIZE;
             let pasteLink = convertToBase(id,"GdelUEcnmLrzOasKXWkohxZuivTIJpMCQyNYBFqwjAfHDPbSgRtV",7);
             return res.status(200).send({
                 "status":"success",

@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   canEdit = true;
   pasteLink = "";
   pasteId = "";
+  todayDate = new Date();
 
   constructor(private route: ActivatedRoute,
     private router: Router,
