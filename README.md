@@ -16,3 +16,7 @@ Key - Value Store - MongoDB
 Id generation service - MySQL
 ```
 
+# User Interface of the system
+![image](https://github.com/Chaitanyaprasad60/Paste-Bin-HLD/assets/49819086/fc4c4366-2f2f-4524-9e78-3500c439989a)
+
+
